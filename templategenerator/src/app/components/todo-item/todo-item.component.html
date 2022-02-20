@@ -1,0 +1,18 @@
+<div class="hover:shadow flex p-4 justify-between items-center bg-gray-50 my-2">
+  <div class="flex items-center">
+  <div>#{{todo!.id}}</div>
+  <div class="ml-2" [ngClass]="{
+    'line-through':completeTodo
+  }" *ngIf="!editTodo;else inputBlock" (click)="completeToggle()">{{todo!.title}}</div>
+  <ng-template #inputBlock>
+    <input class="input ml-2 p-2" [(ngModel)]="todoInput" type="text" placeholder="Update">
+  </ng-template>
+  </div>
+  <div class="flex">
+    <button *ngIf="!editTodo; else elseBlock" class="btn blue mr-2" (click)="updateToggle()">Update</button>
+    <ng-template #elseBlock>
+      <button class="btn blue mr-2" (click)="updateTodo()">Update</button>
+    </ng-template>
+    <button class="btn red" (click)="deleteTodo()">Delete</button>
+  </div>
+</div>
