@@ -1,0 +1,31 @@
+<div>
+    <label>X</label>
+    <input type="text" [(ngModel)]="rasterX"/>
+</div><br>
+<div>
+    <label>Y</label>
+    <input type="text" [(ngModel)]="rasterY"/>
+</div>
+<div class="overlayer">
+    <p>Naam template: </p>
+    <p>Breedte: </p>
+    <p>Hoogte: </p>
+    <mat-form-field>
+        <mat-label>Formaat</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let format of formats" [value]="format.value">
+            {{format.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    <p>Is subtemplate</p>
+    <p>Vraag wedstrijd</p>
+    <p>Selecteerbaar in wizard</p>
+    <p>X1</p>
+    <p>Y1</p>
+    <p>X2</p>
+    <p>Y2</p>
+    <p>Zoom in</p>
+    <p>Zoom out</p>
+<canvas id="canvas" (mouseover)='over()' (mouseout)='out()'></canvas>
+</div>

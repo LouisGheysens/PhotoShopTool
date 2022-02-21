@@ -26,7 +26,7 @@ export class TodoInputComponent implements OnInit {
       {
         id: this.todos!.length,
         completed: false,
-        title: this.todoInput!.trim(),
+        title: this.todoInput!,
       }
     ));
     this.todoInput = '';
