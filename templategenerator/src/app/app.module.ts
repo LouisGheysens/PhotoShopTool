@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { WizardComponent } from './components/wizard/wizard.component';
 import { MatInputModule } from '@angular/material/input'
 import { MatSelectModule } from '@angular/material/select'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -19,12 +20,13 @@ import { MatSelectModule } from '@angular/material/select'
     TodoInputComponent,
     TodoItemComponent,
     TodoListComponent,
-    WizardComponent
+    WizardComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    NgbModule,
     MatInputModule,
     MatSelectModule,
     BrowserAnimationsModule,

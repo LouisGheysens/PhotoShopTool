@@ -1,31 +1,78 @@
-<div>
-    <label>X</label>
-    <input type="text" [(ngModel)]="rasterX"/>
-</div><br>
-<div>
-    <label>Y</label>
-    <input type="text" [(ngModel)]="rasterY"/>
-</div>
 <div class="overlayer">
-    <p>Naam template: </p>
-    <p>Breedte: </p>
-    <p>Hoogte: </p>
-    <mat-form-field>
-        <mat-label>Formaat</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let format of formats" [value]="format.value">
-            {{format.value}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    <p>Is subtemplate</p>
-    <p>Vraag wedstrijd</p>
-    <p>Selecteerbaar in wizard</p>
-    <p>X1</p>
-    <p>Y1</p>
-    <p>X2</p>
-    <p>Y2</p>
-    <p>Zoom in</p>
-    <p>Zoom out</p>
-<canvas id="canvas" (mouseover)='over()' (mouseout)='out()'></canvas>
+    <div class="template-info row">
+        <div class="col-md-3">
+            <label>
+                Naam template
+                <input class="template-name input-xxlarge" id="T_Name" type="text" value="Mijn template">
+            </label>
+        </div>
+        <div class="col-md-3">
+            <label>
+                Breedte
+                <input class="template-width input-xxlarge" max="10000" min="10" name="T_Width" type="number"
+                    value="1200">
+            </label>
+        </div>
+        <div class="col-md-2"><label>
+                Hoogte
+                <input class="template-height input-xxlarge" id="Template_Height" max="10000" min="10" name="T.Height"
+                    type="number" value="900">
+            </label></div>
+        <div class="col-md-3"><label>
+                Formaat
+                <mat-select>
+                    <mat-option *ngFor="let format of fileTypes" [value]="format">
+                        {{FileType2LabelMapping[format]}}
+                    </mat-option>
+                </mat-select>
+                <label>
+                    Is subtemplate
+                    <div class="checker" id="uniform-Template_IsSubTemplate"><span><input id="Template_IsSubTemplate"
+                                name="Template.IsSubTemplate" type="checkbox" value="true" class="input-xxlarge"></span></div>
+                </label>
+                <label>
+            Vraag wedstrijd
+            <div class="checker" id="uniform-Template_IsWedstrijd"><span><input id="Template_IsWedstrijd"
+                        name="Template.IsWedstrijd" type="checkbox" value="true" class="input-xxlarge"></span></div>
+        </label>
+        <label>
+            Selecteerbaar in wizard
+            <div class="checker" id="uniform-Template_IsSelecteerbaar"><span><input id="Template_IsSelecteerbaar"
+                        name="Template.IsSelecteerbaar" type="checkbox" value="true" class="input-xxlarge"></span></div>
+        </label>
+            </label></div>
+</div>
+
+
+    <div class="">
+        <label>
+            X1
+        </label>
+        <label>
+            Y1
+        </label>
+        <label>
+        X2
+        <input type="text" [(ngModel)]="rasterX" />
+        </label>
+        <label>
+            Y2
+            <input type="text" [(ngModel)]="rasterY" />
+        </label>
+    </div>
+    <canvas id="canvas" (mouseover)='over()' (mouseout)='out()'>
+    </canvas>
+
+           <div id='chat' [style.top.px]='y'
+                   [style.left.px]='x'
+                   [style.width.px]='width'
+                   [style.height.px]='height'
+                   (mousedown)='onWindowPress($event)'
+                   (mousemove)='onWindowDrag($event)'>
+        <div (mousedown)='onCornerClick($event, topLeftResize)' id='chat-top-left-resize' class='chat-corner-resize'></div>    
+        <div (mousedown)='onCornerClick($event, topRightResize)' id='chat-top-right-resize' class='chat-corner-resize'></div>    
+        <div (mousedown)='onCornerClick($event, bottomLeftResize)' id='chat-bottom-left-resize' class='chat-corner-resize'></div>    
+        <div (mousedown)='onCornerClick($event, bottomRightResize)' id='chat-bottom-right-resize' class='chat-corner-resize'></div>    
+    </div> 
+    
 </div>
