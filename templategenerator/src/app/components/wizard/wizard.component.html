@@ -47,17 +47,19 @@
     <div class="">
         <label>
             X1
+            <input type="text" [(ngModel)]="rasterX" />
         </label>
         <label>
             Y1
+            <input type="text" [(ngModel)]="rasterX" />
         </label>
         <label>
         X2
-        <input type="text" [(ngModel)]="rasterX" />
+        <input type="text" [(ngModel)]="rasterXTwo" />
         </label>
         <label>
             Y2
-            <input type="text" [(ngModel)]="rasterY" />
+            <input type="text" [(ngModel)]="rasterYTwo" />
         </label>
     </div>
     <canvas id="canvas" (mouseover)='over()' (mouseout)='out()'>
@@ -76,3 +78,5 @@
     </div> 
     
 </div>
+
+

@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, Directive, Output, EventEmitter } from '@angular/core';
 import { FormatEnum, FileType2LabelMapping } from 'src/app/model/format';
 
 @Component({
@@ -9,6 +9,10 @@ import { FormatEnum, FileType2LabelMapping } from 'src/app/model/format';
 export class WizardComponent implements OnInit {
   public rasterX: any;
   public rasterY: any;
+  public rasterXTwo: any;
+  public rasterYTwo:any;
+
+
   x!: number;
   y!: number;
   px!: number;
