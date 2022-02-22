@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { actions } from 'src/app/providers/todos.actions';
 import { todoSelector } from 'src/app/providers/todos.reducers';
@@ -10,26 +10,28 @@ import { TodoModel } from 'src/app/providers/todos.states';
   styleUrls: ['./todo-input.component.css']
 })
 export class TodoInputComponent implements OnInit {
+  @Output() event = new EventEmitter<TodoModel[]>();
+  @Input() todos?: TodoModel[] = [];
+  todoInput?: string;
 
-  todoInput?:string;
-  todos?:TodoModel[];
-
-  constructor(private store:Store) { }
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
-    this.store.select(todoSelector).subscribe(state=>this.todos = state);
+    console.log(this.todos);
+
+    this.store.select(todoSelector).subscribe(state => this.todos = state);
   }
 
   addTodo() {
-    if(this.todoInput!.length > 0)
-    this.store.dispatch(actions.addTodoAction(
-      {
-        id: this.todos!.length,
-        completed: false,
-        title: this.todoInput!,
-      }
-    ));
+      this.store.dispatch(actions.addTodoAction(
+        {
+          id: this.todos!.length,
+          completed: false,
+          title: this.todoInput!,
+        }
+      ));
     this.todoInput = '';
+    this.event.emit(this.todos)
   }
 
 }

@@ -25,6 +25,7 @@
     "@popperjs/core": "^2.11.2",
     "@types/fabric": "^4.5.7",
     "@types/popper.js": "^1.11.0",
+    "angular-editor-fabric-js": "^2.0.0",
     "bootstrap": "^4.6.1",
     "bootstrap-icons": "^1.8.1",
     "fabric": "^5.2.1",

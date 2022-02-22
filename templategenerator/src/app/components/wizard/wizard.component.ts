@@ -34,7 +34,7 @@ export class WizardComponent implements OnInit {
   onMouseMove(e: any) {
     this.rasterX = e.screenX;
     this.rasterY = e.screenY;
-    console.log(e);
+    // console.log(e);
   }
 
   constructor() { 

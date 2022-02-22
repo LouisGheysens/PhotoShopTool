@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
+import { FileType2LabelMapping, VisitorEnum } from 'src/app/model/visitors';
 
 @Component({
   selector: 'app-todo',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TodoComponent implements OnInit {
 
-  constructor() { }
+  
+  public FileType2LabelMapping = FileType2LabelMapping;
+  public fileTypes = Object.values(VisitorEnum);
+
+  closeResult = '';
+
+  constructor(public dialogRef: MatDialogRef<TodoComponent>) { }
 
   ngOnInit(): void {
   }
+
+  closeModal() {
+    this.dialogRef.close();
+  }
+
 
 }

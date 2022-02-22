@@ -13,9 +13,9 @@ import { TodoComponent } from '../todo/todo.component';
   styleUrls: ['./todo-list.component.css']
 })
 export class TodoListComponent implements OnInit {
-  todos:TodoModel[] = [];
+  todos: TodoModel[] = [];
 
-  constructor(private store: Store, private dialog:MatDialog) { }
+  constructor(private store: Store, private dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -24,15 +24,9 @@ export class TodoListComponent implements OnInit {
     this.store.select(todoSelector).subscribe((state) => this.todos = state);
   }
 
-  onCreate() {
-    this.todoservice.intializeFormGorup();
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = "60%";
-    this.dialog.open(TodoComponent, dialogConfig)
+  test(items: any) {
+    this.todos = items;
   }
-
 
 
 }
