@@ -41,8 +41,8 @@ export class WizardComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    this.x = 300;
-    this.y = 100;
+    this.x = 350;
+    this.y = 350;
     this.px = 0;
     this.py = 0;
     this.width = 600;
