@@ -9,10 +9,7 @@
   </ng-template>
   </div>
   <div class="flex">
-    <button *ngIf="!editTodo; else elseBlock" class="btn blue mr-2" (click)="updateToggle()">Update</button>
-    <ng-template #elseBlock>
       <button class="btn blue mr-2" (click)="onCreate()">Update</button>
-    </ng-template>
     <button class="btn red" (click)="deleteTodo()">Delete</button>
   </div>
 </div>

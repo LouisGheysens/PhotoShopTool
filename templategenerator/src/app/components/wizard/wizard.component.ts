@@ -38,6 +38,9 @@ export class WizardComponent implements OnInit {
   }
 
   constructor() { 
+  }
+  
+  ngOnInit(): void {
     this.x = 300;
     this.y = 100;
     this.px = 0;
@@ -47,9 +50,6 @@ export class WizardComponent implements OnInit {
     this.draggingCorner = false;
     this.draggingWindow = false;
     this.minArea = 20000
-  }
-
-  ngOnInit(): void {
   }
 
   over() {
