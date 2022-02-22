@@ -13,15 +13,12 @@ export class TodoComponent implements OnInit {
   public FileType2LabelMapping = FileType2LabelMapping;
   public fileTypes = Object.values(VisitorEnum);
 
-  closeResult = '';
-
-  constructor(public dialogRef: MatDialogRef<TodoComponent>) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
   closeModal() {
-    this.dialogRef.close();
   }
 
 

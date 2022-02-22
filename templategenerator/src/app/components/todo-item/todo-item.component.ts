@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { MatDialogConfig } from '@angular/material/dialog';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { actions } from 'src/app/providers/todos.actions';
 import { todoSelector } from 'src/app/providers/todos.reducers';
@@ -21,7 +22,7 @@ export class TodoItemComponent implements OnInit {
   completeTodo: boolean = false;
   dialog: any;
 
-  constructor(private store: Store) { }
+  constructor(private store: Store, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.completeTodo = this.todo!.completed;
@@ -59,16 +60,16 @@ export class TodoItemComponent implements OnInit {
     }));
     console.log(this.todos);
     this.event.emit(this.todos)
-    // this.loadTodos();
   }
 
 
-  onCreate() {    
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = "40";
-    this.dialog.open(TodoComponent, dialogConfig)
+  onCreate() {
+    // const dialogConfig = new MatDialogConfig();
+    // dialogConfig.disableClose = true;
+    // dialogConfig.autoFocus = true;
+    // dialogConfig.width = "40";
+    // this.dialog.open(TodoComponent, dialogConfig)
+    this.modalService.open(TodoComponent, { size: "xl" });
   }
 
 
