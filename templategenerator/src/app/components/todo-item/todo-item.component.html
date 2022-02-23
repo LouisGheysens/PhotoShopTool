@@ -1,7 +1,44 @@
 <div cdkDropList class=" example-list like hover:shadow flex p-4 justify-between items-center bg-gray-50 my-2"
 (cdkDropListDropped)="drop($event)" cdkDrag>
   <div class="flex items-center">
-  <div>#{{todo!.id}}</div>
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" cursor="pointer" fill="currentColor" class="bi bi-grip-horizontal" viewBox="0 0 16 16">
+      <path d="M2 8a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm3 3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm3 3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm3 3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm3 3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+    </svg>
   <div class="ml-2" [ngClass]="{
     'line-through':completeTodo
   }" *ngIf="!editTodo;else inputBlock">{{todo!.title}}</div>
@@ -12,5 +49,7 @@
   <div class="flex">
       <button class="btn blue mr-2" (click)="onCreate()">Update</button>
     <button class="btn red" (click)="deleteTodo()">Delete</button>
+    </div>
+    <div>
   </div>
 </div>
