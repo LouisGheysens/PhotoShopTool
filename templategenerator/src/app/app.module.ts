@@ -47,6 +47,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { TodoComponent } from './components/todo/todo.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,6 +62,7 @@ import { TodoComponent } from './components/todo/todo.component';
     AppRoutingModule,
     FormsModule,
     NgbModule,
+    DragDropModule,
     MatDialogModule,
     NgbModalModule,
     MatCheckboxModule,

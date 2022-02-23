@@ -1,4 +1,5 @@
-<div class="like hover:shadow flex p-4 justify-between items-center bg-gray-50 my-2">
+<div cdkDropList class=" example-list like hover:shadow flex p-4 justify-between items-center bg-gray-50 my-2"
+(cdkDropListDropped)="drop($event)" cdkDrag>
   <div class="flex items-center">
   <div>#{{todo!.id}}</div>
   <div class="ml-2" [ngClass]="{

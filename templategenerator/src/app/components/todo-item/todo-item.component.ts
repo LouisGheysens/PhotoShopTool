@@ -7,6 +7,8 @@ import { todoSelector } from 'src/app/providers/todos.reducers';
 import { TodoModel } from 'src/app/providers/todos.states';
 import { TodoserviceService } from 'src/app/services/todoservice.service';
 import { TodoComponent } from '../todo/todo.component';
+import {CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+
 
 @Component({
   selector: 'app-todo-item',
@@ -70,6 +72,11 @@ export class TodoItemComponent implements OnInit {
     // dialogConfig.width = "40";
     // this.dialog.open(TodoComponent, dialogConfig)
     this.modalService.open(TodoComponent, { size: "xl" });
+  }
+
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.todos!, event.previousIndex, event.currentIndex);
   }
 
 
