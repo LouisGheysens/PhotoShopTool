@@ -1,6 +1,9 @@
 <div cdkDropList class=" example-list like hover:shadow flex p-4 justify-between items-center bg-gray-50 my-2"
 (cdkDropListDropped)="drop($event)" cdkDrag>
   <div class="flex items-center">
+    <mat-form-field appearance="outline" class="inputm">
+      <input id="nameInput" matInput>
+    </mat-form-field>
     &nbsp;
     &nbsp;
     &nbsp;
@@ -36,7 +39,7 @@
     &nbsp;
     &nbsp;
     &nbsp;
-    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" cursor="pointer" fill="currentColor" class="bi bi-grip-horizontal" viewBox="0 0 16 16">
+    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" cursor="pointer" fill="currentColor" class="bi bi-grip-horizontal" viewBox="0 0 16 16">
       <path d="M2 8a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm3 3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm3 3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm3 3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm3 3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
     </svg>
   <div class="ml-2" [ngClass]="{
