@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { MatDialogConfig } from '@angular/material/dialog';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Store } from '@ngrx/store';
+import { ModalDismissReasons, NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { State, Store } from '@ngrx/store';
 import { actions } from 'src/app/providers/todos.actions';
 import { todoSelector } from 'src/app/providers/todos.reducers';
 import { TodoModel } from 'src/app/providers/todos.states';
-import { TodoserviceService } from 'src/app/services/todoservice.service';
+import { TodoserviceService } from '../todo/todoservice.service';
 import { TodoComponent } from '../todo/todo.component';
 import {CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
@@ -13,18 +13,34 @@ import {CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 @Component({
   selector: 'app-todo-item',
   templateUrl: './todo-item.component.html',
-  styleUrls: ['./todo-item.component.css']
+  styleUrls: ['./todo-item.component.css'],
+  template:  `
+  <div class="modal-header">
+    <h4 class="modal-title">Hi there!</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <p>Hello, {{name}}!</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+  </div>
+`
 })
 export class TodoItemComponent implements OnInit {
   @Output() event = new EventEmitter<TodoModel[]>();
   @Input() todo?: TodoModel;
   todos?: TodoModel[] = [];
+  closeResult = '';
   editTodo: boolean = false;
   todoInput?: string;
   completeTodo: boolean = false;
   dialog: any;
+  @Input() name: any;
 
-  constructor(private store: Store, private modalService: NgbModal) { }
+
+  constructor(private store: Store, private modalService: NgbModal,
+    private todoService: TodoserviceService) { }
 
   ngOnInit(): void {
     this.completeTodo = this.todo!.completed;
@@ -32,13 +48,14 @@ export class TodoItemComponent implements OnInit {
     this.loadTodos();
   }
   loadTodos() {
-
     this.store.select(todoSelector).subscribe((state) => this.todos = state);
   }
 
   updateToggle() {
     this.editTodo = !this.editTodo;
   }
+
+
 
   updateTodo() {
     this.editTodo = !this.editTodo;
@@ -64,14 +81,16 @@ export class TodoItemComponent implements OnInit {
     this.event.emit(this.todos)
   }
 
-
   onCreate() {
-    // const dialogConfig = new MatDialogConfig();
-    // dialogConfig.disableClose = true;
-    // dialogConfig.autoFocus = true;
-    // dialogConfig.width = "40";
-    // this.dialog.open(TodoComponent, dialogConfig)
-    this.modalService.open(TodoComponent, { size: "xl" });
+    this.todoService.create()
+  }
+
+  open(content: any) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
   }
 
 
@@ -79,5 +98,27 @@ export class TodoItemComponent implements OnInit {
     moveItemInArray(this.todos!, event.previousIndex, event.currentIndex);
   }
 
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
 
 }
+
+
+// @Component({selector: 'app-todo-item', templateUrl: './todo-item.component.html'})
+// export class TodoItemComponent {
+//   constructor(private modalService: NgbModal) {}
+
+
+//   open() {
+//     const modalRef = this.modalService.open(TodoItemComponent);
+//     modalRef.componentInstance.name = 'World';
+//   }
+// }

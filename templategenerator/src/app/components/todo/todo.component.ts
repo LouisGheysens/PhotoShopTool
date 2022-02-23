@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FileType2LabelMapping, VisitorEnum } from 'src/app/model/visitors';
 
 @Component({
@@ -9,11 +10,14 @@ import { FileType2LabelMapping, VisitorEnum } from 'src/app/model/visitors';
 })
 export class TodoComponent implements OnInit {
 
-  
+  closeResult = '';
+  header: string= 'THIS IS A MODAL TEST';
+
+
   public FileType2LabelMapping = FileType2LabelMapping;
   public fileTypes = Object.values(VisitorEnum);
 
-  constructor() { }
+  constructor(private modalService: NgbModal) { }
 
   ngOnInit(): void {
   }
