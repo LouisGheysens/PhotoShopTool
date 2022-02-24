@@ -60,16 +60,15 @@
         Type
         &nbsp;
         &nbsp;
-        <select name="cars" id="cars">
+        <select #t name="cars" id="cars">
           <option *ngFor="let fileType of fileTypes"
           [value]="fileType">
     {{FileType2LabelMapping[fileType]}}</option>
         </select>
       </div>
-      <!-- <div *ngIf="selectedOption=='vaste afbeelding'" class="mb-3">
-        <p>Vaste afbeelding</p>
-      -->
-     
+      <div class="mb-3" *ngIf="t.value == 'VasteAfbeelding'">
+        <input  type="file" id="img" name="img" accept="image/*"/>
+      </div>
       <div class="mb-3">
         Colorpicker
         &nbsp;
