@@ -1,5 +1,11 @@
-import { Component, OnInit, HostListener, Directive, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, HostListener, Directive, Output, EventEmitter, ViewChild, ElementRef, Input } from '@angular/core';
 import { FormatEnum, FileType2LabelMapping } from 'src/app/model/format';
+import { fabric } from "fabric";
+import { Store } from '@ngrx/store';
+import { todoSelector } from 'src/app/providers/todos.reducers';
+import { actions } from 'src/app/providers/todos.actions';
+import { TodoModel } from 'src/app/providers/todos.states';
+import { Canvas } from 'fabric/fabric-impl';
 
 @Component({
   selector: 'app-wizard',
@@ -10,7 +16,15 @@ export class WizardComponent implements OnInit {
   public rasterX: any;
   public rasterY: any;
   public rasterXTwo: any;
-  public rasterYTwo:any;
+  public rasterYTwo: any;
+
+  @Output() event = new EventEmitter<TodoModel[]>();
+  @Input() todos?: TodoModel[] = [];
+  todoInput?: string;
+
+  @ViewChild('htmlCanvas')
+  htmlCanvas!: ElementRef;
+  private canvas!: fabric.Canvas;
 
 
   x!: number;
@@ -27,29 +41,42 @@ export class WizardComponent implements OnInit {
   public FileType2LabelMapping = FileType2LabelMapping;
   public fileTypes = Object.values(FormatEnum);
 
-  canvas!: HTMLCanvasElement;
 
-  
   @HostListener('mousemove', ['$event'])
-  onMouseMove(e: any) {
+ onMouseMove(e: any) {
     this.rasterX = e.screenX;
     this.rasterY = e.screenY;
-    // console.log(e);
   }
 
-  constructor() { 
+  constructor(private store: Store) {
   }
-  
+
   ngOnInit(): void {
-    this.x = 350;
-    this.y = 350;
+    this.store.select(todoSelector).subscribe(state => this.todos = state);
+
+    this.x = 100;
+    this.y = 100;
     this.px = 0;
     this.py = 0;
     this.width = 600;
-    this.height = 300; 
-    this.draggingCorner = false;
-    this.draggingWindow = false;
-    this.minArea = 20000
+    this.height = 300;
+    this.draggingCorner = true;
+    this.draggingWindow = true;
+    this.minArea = 20000;
+
+    this.canvas = new fabric.Canvas('canvas', {});
+  }
+
+  addTodo() {
+    this.store.dispatch(actions.addTodoAction(
+      {
+        id: this.todos!.length,
+        completed: false,
+        title: this.todoInput!,
+      }
+    ));
+    this.todoInput = '';
+    this.event.emit(this.todos)
   }
 
   over() {
@@ -61,7 +88,7 @@ export class WizardComponent implements OnInit {
     console.log("Mouseout called");
   }
 
-   area() {
+  area() {
     return this.width * this.height;
   }
 
@@ -72,8 +99,8 @@ export class WizardComponent implements OnInit {
   }
 
   onWindowDrag(event: MouseEvent) {
-     if (!this.draggingWindow) {
-        return;
+    if (!this.draggingWindow) {
+      return;
     }
     let offsetX = event.clientX - this.px;
     let offsetY = event.clientY - this.py;
@@ -120,7 +147,7 @@ export class WizardComponent implements OnInit {
   @HostListener('document:mousemove', ['$event'])
   onCornerMove(event: MouseEvent) {
     if (!this.draggingCorner) {
-        return;
+      return;
     }
     let offsetX = event.clientX - this.px;
     let offsetY = event.clientY - this.py;
@@ -132,10 +159,10 @@ export class WizardComponent implements OnInit {
 
     this.resizer(offsetX, offsetY);
     if (this.area() < this.minArea) {
-        this.x = lastX;
-        this.y = lastY;
-        this.width = pWidth;
-        this.height = pHeight;
+      this.x = lastX;
+      this.y = lastY;
+      this.width = pWidth;
+      this.height = pHeight;
     }
     this.px = event.clientX;
     this.py = event.clientY;
@@ -143,8 +170,49 @@ export class WizardComponent implements OnInit {
 
   @HostListener('document:mouseup', ['$event'])
   onCornerRelease(event: MouseEvent) {
-    this.draggingWindow = false;
-    this.draggingCorner = false;
+    this.draggingWindow = true;
+    this.draggingCorner = true;
   }
 
+  getElement() {
+    document.getElementById('chat');
+  }
+
+
+  addDiv() {
+    // let add: any;
+    // switch (figure) {
+    //   case 'square':
+        let add = new fabric.Rect({
+          width: 200, height: 100, left: 10, top: 10, angle: 0,
+          fill: '',
+          hoverCursor: 'default',
+          hasBorders: true,
+          dirty: false,
+          lockMovementX: false,
+          lockMovementY: false,
+          evented: false,
+        });
+    // }
+    this.selectItemAfterAdded(add);
+    this.canvas.add(add);
+    this.canvas.centerObject(add);
+
+
+                  // prevent corner resizing
+                  add.setControlsVisibility({
+                    tl: false,
+                    tr: false,
+                    bl: false,
+                    br: false,
+                    mtr: false
+                  });
+  }
+  selectItemAfterAdded(obj: any) {
+    this.canvas.discardActiveObject().renderAll();
+    this.canvas.setActiveObject(obj);
+  }
+
+
 }
+

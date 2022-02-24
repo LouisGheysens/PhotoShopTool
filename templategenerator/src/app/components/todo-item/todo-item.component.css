@@ -95,6 +95,9 @@
   height: 24px;
 }
 
+.colorpicker-parent { position: relative; } color-picker { position: fixed }
+
+
 .self {
   cursor: move;
   float: right;

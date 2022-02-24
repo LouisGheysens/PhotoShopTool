@@ -32,6 +32,8 @@ export class TodoItemComponent implements OnInit {
   dialog: any;
   @Input() name: any;
   @ViewChild('htmlCanvas') htmlCanvas: ElementRef | undefined;
+  @ViewChild('content')
+  content!: ElementRef;
   private canvas!: fabric.Canvas;
 
 
@@ -109,45 +111,14 @@ export class TodoItemComponent implements OnInit {
     this.todoService.create()
   }
 
-  open(content: any) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+  open() {
+    this.modalService.open(this.content, {centered: false, size: 'xl'});
   }
-
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.todos!, event.previousIndex, event.currentIndex);
   }
 
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'NONE';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'NONE TYPE';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
-
-  addDiv(figure: any) {
-    let add:any;
-    switch(figure) {
-      case 'square':
-        add = new fabric.Rect({
-          width: 200, height:100, left: 10, top:10, angle: 0,
-          fill: '#3f51b5'
-        });
-    }
-    this.canvas.add(add);
-    this.selectItemAfterAdded(add);
-  }
-  selectItemAfterAdded(obj: any) {
-    this.canvas.discardActiveObject().renderAll();
-    this.canvas.setActiveObject(obj);
-  }
 
 
 
