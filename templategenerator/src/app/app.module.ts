@@ -8,7 +8,7 @@ import { TodoInputComponent } from './components/todo-input/todo-input.component
 import { TodoItemComponent } from './components/todo-item/todo-item.component';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { todoReducer } from './providers/todos.reducers'
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WizardComponent } from './components/wizard/wizard.component';
 import { MatInputModule } from '@angular/material/input'
 import { MatSelectModule } from '@angular/material/select'
@@ -47,7 +47,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { TodoComponent } from './components/todo/todo.component';
+import { MAT_COLOR_FORMATS, NgxMatColorPickerModule, NGX_MAT_COLOR_FORMATS } from '@angular-material-components/color-picker';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -85,8 +87,10 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     NgbModule,
     NgbModalModule,
     MatStepperModule,
+    ReactiveFormsModule,
     MatTabsModule,
     MatTreeModule,
+    NgxMatColorPickerModule,
     MatButtonModule,
     MatButtonToggleModule,
     MatBadgeModule,
@@ -109,7 +113,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
       "todos": todoReducer,
     })
   ],
-  providers: [],
+  providers: [{ provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
