@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, ElementRef, ViewChild } from '@angular/core';
 import { MatDialogConfig } from '@angular/material/dialog';
 import { ModalDismissReasons, NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { State, Store } from '@ngrx/store';
@@ -12,6 +12,7 @@ import { FileType2LabelMapping } from 'src/app/model/visitors';
 import { VisitorEnum } from 'src/app/model/visitors';
 import { FormControl } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
+import { fabric } from "fabric";
 
 
 @Component({
@@ -30,6 +31,9 @@ export class TodoItemComponent implements OnInit {
   completeTodo: boolean = false;
   dialog: any;
   @Input() name: any;
+  @ViewChild('htmlCanvas') htmlCanvas: ElementRef | undefined;
+  private canvas!: fabric.Canvas;
+
 
   
   public FileType2LabelMapping = FileType2LabelMapping;
@@ -120,25 +124,31 @@ export class TodoItemComponent implements OnInit {
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
+      return 'NONE';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
+      return 'NONE TYPE';
     } else {
       return `with: ${reason}`;
     }
   }
 
+  addDiv(figure: any) {
+    let add:any;
+    switch(figure) {
+      case 'square':
+        add = new fabric.Rect({
+          width: 200, height:100, left: 10, top:10, angle: 0,
+          fill: '#3f51b5'
+        });
+    }
+    this.canvas.add(add);
+    this.selectItemAfterAdded(add);
+  }
+  selectItemAfterAdded(obj: any) {
+    this.canvas.discardActiveObject().renderAll();
+    this.canvas.setActiveObject(obj);
+  }
+
+
 
 }
-
-
-// @Component({selector: 'app-todo-item', templateUrl: './todo-item.component.html'})
-// export class TodoItemComponent {
-//   constructor(private modalService: NgbModal) {}
-
-
-//   open() {
-//     const modalRef = this.modalService.open(TodoItemComponent);
-//     modalRef.componentInstance.name = 'World';
-//   }
-// }

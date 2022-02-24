@@ -49,6 +49,7 @@ import { MatTableModule } from '@angular/material/table';
 import { TodoComponent } from './components/todo/todo.component';
 import { MAT_COLOR_FORMATS, NgxMatColorPickerModule, NGX_MAT_COLOR_FORMATS } from '@angular-material-components/color-picker';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { fabric } from 'fabric';
 
 @NgModule({
   declarations: [
