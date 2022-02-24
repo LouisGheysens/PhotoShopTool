@@ -65,9 +65,6 @@
         </mat-select>
       </div>
       <div class="mb-3">
-        Vaste afbeelding
-      </div>
-      <div class="mb-3">
         Colorpicker
         <mat-form-field>
           <input matInput [ngxMatColorPicker]="picker" [formControl]="colorCtr" [disabled]="disabled">
@@ -78,7 +75,7 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); addDiv('square');">Save</button>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
   </div>
 </ng-template>
 

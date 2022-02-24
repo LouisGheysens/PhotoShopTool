@@ -34,4 +34,8 @@ export class TodoInputComponent implements OnInit {
     this.event.emit(this.todos)
   }
 
+  addDiv() {
+    
+  }
+
 }
