@@ -8,25 +8,16 @@ import { TodoModel } from 'src/app/providers/todos.states';
 import { TodoserviceService } from '../todo/todoservice.service';
 import { TodoComponent } from '../todo/todo.component';
 import {CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { FileType2LabelMapping } from 'src/app/model/visitors';
+import { VisitorEnum } from 'src/app/model/visitors';
 
 
 @Component({
   selector: 'app-todo-item',
   templateUrl: './todo-item.component.html',
   styleUrls: ['./todo-item.component.css'],
-  template:  `
-  <div class="modal-header">
-    <h4 class="modal-title">Hi there!</h4>
-    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
-  </div>
-  <div class="modal-body">
-    <p>Hello, {{name}}!</p>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
-  </div>
-`
 })
+
 export class TodoItemComponent implements OnInit {
   @Output() event = new EventEmitter<TodoModel[]>();
   @Input() todo?: TodoModel;
@@ -37,6 +28,10 @@ export class TodoItemComponent implements OnInit {
   completeTodo: boolean = false;
   dialog: any;
   @Input() name: any;
+
+  
+  public FileType2LabelMapping = FileType2LabelMapping;
+  public fileTypes = Object.values(VisitorEnum);
 
 
   constructor(private store: Store, private modalService: NgbModal,
