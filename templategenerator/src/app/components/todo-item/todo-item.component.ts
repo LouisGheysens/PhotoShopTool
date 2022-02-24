@@ -12,6 +12,7 @@ import { FileType2LabelMapping } from 'src/app/model/visitors';
 import { VisitorEnum } from 'src/app/model/visitors';
 import { FormControl } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
+import { ColorPickerModule } from 'ngx-color-picker';
 import { fabric } from "fabric";
 
 

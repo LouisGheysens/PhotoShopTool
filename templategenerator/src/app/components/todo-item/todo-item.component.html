@@ -58,19 +58,23 @@
     <form>
       <div class="mb-3">
         Type
+        &nbsp;
+        &nbsp;
         <select name="cars" id="cars">
-          <option [(ngModel)]="selectedOption")] *ngFor="let fileType of fileTypes"
+          <option *ngFor="let fileType of fileTypes"
           [value]="fileType">
     {{FileType2LabelMapping[fileType]}}</option>
         </select>
       </div>
-      <div *ngIf="selectedOption=='vaste afbeelding'" class="mb-3">
+      <!-- <div *ngIf="selectedOption=='vaste afbeelding'" class="mb-3">
         <p>Vaste afbeelding</p>
+      -->
      
-      </div>
       <div class="mb-3">
         Colorpicker
-     
+        &nbsp;
+        &nbsp;
+        <input type="color" id="favcolor" name="favcolor" value="#ff0000"><br><br>
       </div>
     </form>
   </div>
