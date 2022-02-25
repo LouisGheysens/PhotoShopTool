@@ -168,6 +168,7 @@ export class WizardComponent implements OnInit {
     let lastY = this.y;
     let pWidth = this.width;
     let pHeight = this.height;
+    console.log(this.height);
 
     if (this.area() < this.minArea) {
       this.x = lastX;
