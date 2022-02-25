@@ -60,7 +60,6 @@ export class WizardComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.select(todoSelector).subscribe(state => this.todos = state);
-
     this.x = 100;
     this.y = 100;
     this.px = 0;
@@ -170,7 +169,6 @@ export class WizardComponent implements OnInit {
     let pWidth = this.width;
     let pHeight = this.height;
 
-    // this.resizer(offsetX, offsetY);
     if (this.area() < this.minArea) {
       this.x = lastX;
       this.y = lastY;
