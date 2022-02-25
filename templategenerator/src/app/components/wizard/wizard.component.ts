@@ -10,8 +10,10 @@ import { Canvas } from 'fabric/fabric-impl';
 @Component({
   selector: 'app-wizard',
   templateUrl: './wizard.component.html',
-  styleUrls: ['./wizard.component.css']
+  styleUrls: ['./wizard.component.css'],
+  
 })
+
 export class WizardComponent implements OnInit {
   public rasterX: any;
   public rasterY: any;
@@ -42,11 +44,13 @@ export class WizardComponent implements OnInit {
   public fileTypes = Object.values(FormatEnum);
 
 
-  @HostListener('mousemove', ['$event'])
+  // @HostListener('mousemove', ['$event'])
  onMouseMove(e: any) {
     this.rasterX = e.screenX;
     this.rasterY = e.screenY;
   }
+
+
 
   constructor(private store: Store) {
   }
@@ -157,7 +161,7 @@ export class WizardComponent implements OnInit {
     let pWidth = this.width;
     let pHeight = this.height;
 
-    this.resizer(offsetX, offsetY);
+    // this.resizer(offsetX, offsetY);
     if (this.area() < this.minArea) {
       this.x = lastX;
       this.y = lastY;
@@ -180,9 +184,6 @@ export class WizardComponent implements OnInit {
 
 
   addDiv() {
-    // let add: any;
-    // switch (figure) {
-    //   case 'square':
         let add = new fabric.Rect({
           width: 200, height: 100, left: 10, top: 10, angle: 0,
           fill: '',
@@ -193,7 +194,6 @@ export class WizardComponent implements OnInit {
           lockMovementY: false,
           evented: false,
         });
-    // }
     this.selectItemAfterAdded(add);
     this.canvas.add(add);
     this.canvas.centerObject(add);

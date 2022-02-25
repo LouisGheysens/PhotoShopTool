@@ -120,6 +120,17 @@ export class TodoItemComponent implements OnInit {
     moveItemInArray(this.todos!, event.previousIndex, event.currentIndex);
   }
 
+  
+  // addImage(e:any): void {
+  //   let context = this.canvas;
+  //   var render = new FileReader();
+  //   render.onload = function(event) {
+  //     var img = new Image();
+  //     img.onload = function() {
+  //     }
+  //     img.src = event.target?.result;
+  //   }
+  // }
 
 
 
