@@ -67,13 +67,11 @@
     </div>
     <div canvas (onMouseMoveEvent)='onMouseMove($event)'>
         <canvas class="example-boundary" id="canvas" canvas height="750" width="1450"
-        style='z-index:-1'
              #htmlCanvas (mouseover)='over()' (mouseout)='out()'>
         </canvas>
-
     </div>
 
-    <!-- <div cdkDragBoundary=".example-boundary"  id='chat' [style.top.px]='y'
+    <div cdkDragBoundary=".example-boundary"  id='chat' [style.top.px]='y'
                    [style.left.px]='x'
                    [style.width.px]='width'
                    [style.height.px]='height'
@@ -83,7 +81,7 @@
         <div (mousedown)='onCornerClick($event, topRightResize)' id='chat-top-right-resize' class='chat-corner-resize'></div>
         <div (mousedown)='onCornerClick($event, bottomLeftResize)' id='chat-bottom-left-resize' class='chat-corner-resize'></div>
         <div (mousedown)='onCornerClick($event, bottomRightResize)' id='chat-bottom-right-resize' class='chat-corner-resize'></div>
-    </div> -->
+    </div>
 
 </div>
 

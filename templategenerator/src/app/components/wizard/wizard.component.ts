@@ -44,11 +44,14 @@ export class WizardComponent implements OnInit {
 
   public FileType2LabelMapping = FileType2LabelMapping;
   public fileTypes = Object.values(FormatEnum);
+  props: any;
 
 
  onMouseMove(e: any) {
     this.rasterX = e.screenX;
     this.rasterY = e.screenY;
+    this.rasterXTwo = e.clientX;
+    this.rasterYTwo = e.clientY;
   }
 
 
@@ -68,7 +71,13 @@ export class WizardComponent implements OnInit {
     this.draggingWindow = true;
     this.minArea = 20000;
 
-    this.canvas = new fabric.Canvas('canvas', {});
+    this.canvas = new fabric.Canvas('canvas', {
+      hoverCursor: 'pointer',
+      selection: true,
+      selectionBorderColor: 'yellow',
+    });
+
+
   }
 
   addTodo() {
@@ -179,21 +188,28 @@ export class WizardComponent implements OnInit {
   }
 
   addDiv() {
-        let add = new fabric.Rect({
-          width: 200, height: 100, left: 10, top: 10, angle: 0,
+    
+        var add = new fabric.Rect({
+          width: 200, height: 100, left: 10, top: 10 ,angle: 0,
           fill: 'lightblue',
-          hoverCursor: 'default',
           hasBorders: true,
-          dirty: false,
           lockMovementX: false,
           lockMovementY: false,
           evented: false,
           selectable: true,
+          originX: 'center',
+          strokeWidth: 3,
+          borderScaleFactor: 5,
+          borderColor: 'orange'
         });
+        add.hasRotatingPoint = true;
+
+
+    this.extend(add);
     this.selectItemAfterAdded(add);
     this.canvas.add(add);
-    this.canvas.centerObject(add);
 
+    this.canvas.centerObject(add);
                   add.setControlsVisibility({
                     tl: false,
                     tr: false,
@@ -202,6 +218,23 @@ export class WizardComponent implements OnInit {
                     mtr: false
                   });
   }
+
+  setCanvasFill() {
+    if (!this.props.canvasImage) {
+      this.canvas.backgroundColor = this.props.canvasFill;
+      this.canvas.renderAll();
+    }
+  }
+
+  extend(obj: { toObject: () => any; }) {
+    obj.toObject = ((toObject) => {
+      return () => {
+        return fabric.util.object.extend(toObject.call(this), {
+        });
+      };
+    })(obj.toObject);
+  }
+      
   selectItemAfterAdded(obj: any) {
     this.canvas.discardActiveObject().renderAll();
     this.canvas.setActiveObject(obj);
@@ -232,14 +265,11 @@ export class WizardComponent implements OnInit {
     var strDataURI = imgData.substr(22, imgData.length);
     var blob = this.dataURLtoBlob(imgData);
     var objurl = URL.createObjectURL(blob);
-
     let name = this.getRandomString( Math.random().toString(36).substring(2, 15) + 
     Math.random().toString(36).substring(2, 15))
     link.download = name;
-
     link.href = objurl;
-
-   link.click();
+    link.click();
 }
   
 
