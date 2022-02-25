@@ -26,7 +26,8 @@ export class WizardComponent implements OnInit {
 
   @ViewChild('htmlCanvas')
   htmlCanvas!: ElementRef;
-  private canvas!: fabric.Canvas;
+  canvas!: fabric.Canvas;
+  
 
 
   x!: number;
@@ -44,12 +45,10 @@ export class WizardComponent implements OnInit {
   public fileTypes = Object.values(FormatEnum);
 
 
-  // @HostListener('mousemove', ['$event'])
  onMouseMove(e: any) {
     this.rasterX = e.screenX;
     this.rasterY = e.screenY;
   }
-
 
 
   constructor(private store: Store) {
@@ -178,15 +177,10 @@ export class WizardComponent implements OnInit {
     this.draggingCorner = true;
   }
 
-  getElement() {
-    document.getElementById('chat');
-  }
-
-
   addDiv() {
         let add = new fabric.Rect({
           width: 200, height: 100, left: 10, top: 10, angle: 0,
-          fill: '',
+          fill: 'lightblue',
           hoverCursor: 'default',
           hasBorders: true,
           dirty: false,
@@ -198,8 +192,6 @@ export class WizardComponent implements OnInit {
     this.canvas.add(add);
     this.canvas.centerObject(add);
 
-
-                  // prevent corner resizing
                   add.setControlsVisibility({
                     tl: false,
                     tr: false,
@@ -212,6 +204,31 @@ export class WizardComponent implements OnInit {
     this.canvas.discardActiveObject().renderAll();
     this.canvas.setActiveObject(obj);
   }
+
+  dataURLtoBlob(dataurl: any) {
+    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+    while(n--){
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new Blob([u8arr], {type:mime});
+}
+
+  exportToImg() {
+    var link = document.createElement("a");
+    var imgData = this.canvas.toDataURL({    format: 'png',
+      multiplier: 4});
+    var strDataURI = imgData.substr(22, imgData.length);
+    var blob = this.dataURLtoBlob(imgData);
+    var objurl = URL.createObjectURL(blob);
+
+    link.download = "helloWorld.png";
+
+    link.href = objurl;
+
+   link.click();
+}
+  
 
 
 }

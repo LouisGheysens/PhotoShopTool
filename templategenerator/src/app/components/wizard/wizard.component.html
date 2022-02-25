@@ -67,6 +67,7 @@
     </div>
     <div canvas (onMouseMoveEvent)='onMouseMove($event)'>
         <canvas class="example-boundary" id="canvas" canvas height="750" width="1450"
+        style='z-index:-1'
              #htmlCanvas (mouseover)='over()' (mouseout)='out()'>
         </canvas>
 
@@ -86,7 +87,7 @@
 
 </div>
 
-<div class="checkout-btn">
+<div (click)="exportToImg()" class="checkout-btn">
     <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" fill="currentColor" class="bi bi-save-fill"
         viewBox="0 0 16 16">
         <path
