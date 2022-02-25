@@ -6,6 +6,7 @@ import { todoSelector } from 'src/app/providers/todos.reducers';
 import { actions } from 'src/app/providers/todos.actions';
 import { TodoModel } from 'src/app/providers/todos.states';
 import { Canvas } from 'fabric/fabric-impl';
+import { trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-wizard',
@@ -187,6 +188,7 @@ export class WizardComponent implements OnInit {
           lockMovementX: false,
           lockMovementY: false,
           evented: false,
+          selectable: true,
         });
     this.selectItemAfterAdded(add);
     this.canvas.add(add);
@@ -203,6 +205,15 @@ export class WizardComponent implements OnInit {
   selectItemAfterAdded(obj: any) {
     this.canvas.discardActiveObject().renderAll();
     this.canvas.setActiveObject(obj);
+  }
+
+  getRandomString(length: any) {
+    var randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var result = '';
+    for ( var i = 0; i < length; i++ ) {
+        result += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
+    }
+    return result;
   }
 
   dataURLtoBlob(dataurl: any) {
@@ -222,7 +233,9 @@ export class WizardComponent implements OnInit {
     var blob = this.dataURLtoBlob(imgData);
     var objurl = URL.createObjectURL(blob);
 
-    link.download = "helloWorld.png";
+    let name = this.getRandomString( Math.random().toString(36).substring(2, 15) + 
+    Math.random().toString(36).substring(2, 15))
+    link.download = name;
 
     link.href = objurl;
 
